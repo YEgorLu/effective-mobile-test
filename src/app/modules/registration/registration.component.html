@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="regForm">
+  <form [formGroup]="regForm" (ngSubmit)="register()">
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput type="email" placeholder="your@mail.ru" formControlName="email" required>

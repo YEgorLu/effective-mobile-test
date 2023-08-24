@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {mustMatch} from "../../shared/validators/mustMatch";
 import {RoutePaths} from "../../shared/helpers/route-paths";
+import {LocalStorageService} from "../../core/services/local-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +13,11 @@ import {RoutePaths} from "../../shared/helpers/route-paths";
 export class RegistrationComponent {
   regForm: FormGroup;
 
-  constructor(fb: FormBuilder) {
+  constructor(
+    fb: FormBuilder,
+    private ls: LocalStorageService,
+    private router: Router,
+    ) {
     this.regForm = fb.group({
         email: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('', [Validators.minLength(7), Validators.required]),
@@ -20,6 +26,26 @@ export class RegistrationComponent {
       {
         validators: [mustMatch('password', 'checkPassword')]
       })
+  }
+
+  register() {
+    const email: string | null = this.regForm.controls['email'].value;
+    const password: string | null = this.regForm.controls['password'].value;
+    const checkPassword: string | null = this.regForm.controls['checkPassword'].value;
+
+    if (!email || !password || !checkPassword) return;
+    if (password !== checkPassword) return;
+
+    let registeredAccs = this.ls.get('registered');
+    if (registeredAccs && email in registeredAccs) return;
+
+    if (!registeredAccs) {
+      registeredAccs = {};
+    }
+    registeredAccs[email] = password;
+    this.ls.set('registered', registeredAccs);
+    this.ls.set('authData', {email, password});
+    this.router.navigate([RoutePaths.POSTS]);
   }
 
   getEmailError() {
