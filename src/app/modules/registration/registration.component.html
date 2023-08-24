@@ -1,0 +1,25 @@
+<div class="container">
+  <form [formGroup]="regForm">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="your@mail.ru" formControlName="email" required>
+      <mat-error *ngIf="regForm.controls.email.invalid">{{getEmailError()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Пароль</mat-label>
+      <input matInput type="password" placeholder="*******" formControlName="password" required>
+      <mat-error *ngIf="regForm.controls.password.invalid">{{getPasswordError()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Повторите пароль</mat-label>
+      <input matInput type="password" placeholder="*******" formControlName="checkPassword" required>
+      <mat-error *ngIf="regForm.controls.password.invalid">{{getPasswordCheckError()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" [disabled]="regForm.valid">Зарегистрироваться</button>
+    <button mat-button type="button" [routerLink]="RoutePaths.AUTHORIZATION">Войти</button>
+  </form>
+</div>
+
