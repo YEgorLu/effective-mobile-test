@@ -13,6 +13,6 @@
     </mat-form-field>
 
     <button mat-button type="submit" [disabled]="authForm.invalid">Войти</button>
-    <button mat-button type="button" [routerLink]="RoutePaths.REGISTRATION">Зарегистрироваться</button>
+    <button mat-button [routerLink]="[c.REGISTRATION]" [routerLinkActive]="'active'">Зарегистрироваться</button>
   </form>
 </div>

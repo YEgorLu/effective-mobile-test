@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {RoutePaths} from "../../shared/helpers/route-paths";
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Router} from "@angular/router";
+import { RoutePaths } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-authorization',
@@ -19,6 +19,10 @@ export class AuthorizationComponent {
     private ls: LocalStorageService,
     private router: Router,
   ) {
+  }
+
+  goToReg() {
+    this.router.navigate([RoutePaths.REGISTRATION])
   }
 
   login() {
@@ -68,5 +72,5 @@ export class AuthorizationComponent {
     return '';
   }
 
-  protected readonly RoutePaths = RoutePaths;
+  protected readonly c = RoutePaths;
 }

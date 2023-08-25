@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {mustMatch} from "../../shared/validators/mustMatch";
-import {RoutePaths} from "../../shared/helpers/route-paths";
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Router} from "@angular/router";
+import {RoutePaths} from "../../app-routing.module";
 
 @Component({
   selector: 'app-registration',
@@ -26,6 +26,10 @@ export class RegistrationComponent {
       {
         validators: [mustMatch('password', 'checkPassword')]
       })
+  }
+
+  goToAuth() {
+    this.router.navigate([RoutePaths.AUTHORIZATION]);
   }
 
   register() {

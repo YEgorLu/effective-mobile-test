@@ -1,39 +1,65 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {authGuard} from "./core/guards/auth.guard";
-import {RoutePaths} from "./shared/helpers/route-paths";
+
+enum RoutePathsInner {
+  AUTHORIZATION = 'authorization',
+  REGISTRATION = 'registration',
+  POSTS = 'posts',
+  POST = 'post',
+}
+
+function getRoutePaths(): Readonly<Record<keyof typeof RoutePathsInner, string>> {
+  const b: any = {};
+  Object.entries(RoutePathsInner).forEach(([k, v]) => {
+    b[k] = `/${v}`;
+  })
+  return b;
+}
+export const RoutePaths = getRoutePaths();
 
 const routes: Routes = [
   {
-    path: '**',
-    redirectTo: RoutePaths.AUTHORIZATION,
-  },
-  {
-    path: RoutePaths.REGISTRATION,
+    path: RoutePathsInner.REGISTRATION,
     loadChildren: () => import('./modules/registration/registration.module').then(m => m.RegistrationModule)
   },
   {
-    path: RoutePaths.AUTHORIZATION,
+    path: RoutePathsInner.AUTHORIZATION,
     loadChildren: () => import('./modules/authorization/authorization.module').then(m => m.AuthorizationModule)
   },
   {
-    path: RoutePaths.POSTS,
+    path: RoutePathsInner.POSTS,
     canActivate: [authGuard],
     loadChildren: () => import('./modules/posts/posts.module').then(m => m.PostsModule)
   },
   {
-    path: `${RoutePaths.POST}/:id`,
+    path: `${RoutePathsInner.POST}/:id`,
     canActivate: [authGuard],
     loadChildren: () => import('./modules/post/post.module').then(m => m.PostModule)
   },
   {
-    path: RoutePaths.POST,
-    redirectTo: RoutePaths.POSTS,
-  }
+    path: RoutePathsInner.POST,
+    redirectTo: RoutePathsInner.POSTS,
+  },
+  {
+    path: '**',
+    redirectTo: RoutePathsInner.AUTHORIZATION,
+  },
+  /*{
+    path: '',
+    component: AppComponent,
+    children: [
+
+    ]
+  },*/
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
