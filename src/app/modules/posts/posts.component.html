@@ -1,6 +1,19 @@
-<div class="list">
-  <div *ngFor="let post of posts$ | async" [routerLink]="[RoutePaths.POST, post.id]" class="item" >
-    <h2>{{post.title | titlecase}}</h2>
-    <p>{{post.body | truncate: 100}}</p>
-  </div>
+<div class="list" *ngLet="posts$ | async as posts">
+  <mat-card *ngFor="let post of posts | slice: pageIndex*pageSize: pageIndex*pageSize + pageSize"
+            [routerLink]="[RoutePaths.POST, post.id]" class="item">
+    <mat-card-title>
+      <h2>{{post.title | titlecase}}</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <p>{{post.body | truncate: 100}}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-paginator (page)="handlePageChange($event)"
+                 [hidePageSize]="true"
+                 [lang]="'ru'"
+                 [length]="posts!.length" [pageSize]="10"
+                 [showFirstLastButtons]="true"></mat-paginator>
 </div>
+
+<mat-spinner *ngIf="!gotPosts"></mat-spinner>

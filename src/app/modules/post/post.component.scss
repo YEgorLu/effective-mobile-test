@@ -1,0 +1,33 @@
+.container {
+  width: 80%;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.post-wrapper {
+  text-align: center;
+
+  & h1 {
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+  }
+}
+
+mat-spinner,
+.back {
+  position: absolute;
+}
+
+mat-spinner {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  align-self: center;
+}
+
+.back {
+  top: 10%;
+  right: 10%;
+}

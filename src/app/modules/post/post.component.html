@@ -1,1 +1,11 @@
-<p>post works!</p>
+<div class="container">
+  <div *ngIf="postData" class="post-wrapper">
+    <h1>{{postData.title | titlecase}}</h1>
+    <p>{{postData.body}}</p>
+  </div>
+</div>
+
+<mat-spinner *ngIf="!postData"></mat-spinner>
+<button mat-icon-button class="back" [routerLink]="RoutePaths.POSTS">
+  <mat-icon>arrow_back</mat-icon>
+</button>

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { PostRoutingModule } from './post-routing.module';
 import { PostComponent } from './post.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { PostComponent } from './post.component';
   ],
   imports: [
     CommonModule,
-    PostRoutingModule
+    PostRoutingModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class PostModule { }

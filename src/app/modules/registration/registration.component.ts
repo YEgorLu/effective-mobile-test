@@ -4,6 +4,7 @@ import {mustMatch} from "../../shared/validators/mustMatch";
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Router} from "@angular/router";
 import {RoutePaths} from "../../app-routing.module";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-registration',
@@ -17,6 +18,7 @@ export class RegistrationComponent {
     fb: FormBuilder,
     private ls: LocalStorageService,
     private router: Router,
+    private auth: AuthService,
     ) {
     this.regForm = fb.group({
         email: new FormControl('', [Validators.email, Validators.required]),
@@ -40,16 +42,7 @@ export class RegistrationComponent {
     if (!email || !password || !checkPassword) return;
     if (password !== checkPassword) return;
 
-    let registeredAccs = this.ls.get('registered');
-    if (registeredAccs && email in registeredAccs) return;
-
-    if (!registeredAccs) {
-      registeredAccs = {};
-    }
-    registeredAccs[email] = password;
-    this.ls.set('registered', registeredAccs);
-    this.ls.set('authData', {email, password});
-    this.router.navigate([RoutePaths.POSTS]);
+    this.auth.register(email, password, [RoutePaths.POSTS]);
   }
 
   getEmailError() {

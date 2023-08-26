@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Router} from "@angular/router";
 import { RoutePaths } from 'src/app/app-routing.module';
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-authorization',
@@ -18,6 +19,7 @@ export class AuthorizationComponent {
   constructor(
     private ls: LocalStorageService,
     private router: Router,
+    private auth: AuthService,
   ) {
   }
 
@@ -26,22 +28,30 @@ export class AuthorizationComponent {
   }
 
   login() {
-    if (this.authForm.invalid) return;
+    if (this.authForm.invalid) {
+      console.log(this.authForm.errors)
+      return;
+    }
 
     const email = this.authForm.controls.email.value;
-    const password = this.authForm.controls.email.value;
-    if (!email || !password) return;
+    const password = this.authForm.controls.password.value;
+    if (!email || !password){
+     console.log(`email: ${email} password: ${password}`);
+     return;
+    }
 
     const registeredAccs = this.ls.get('registered');
-    if (!registeredAccs) return;
+    if (!registeredAccs) {
+      console.log(`registeredAccs: ${registeredAccs}`)
+      return;
+    }
 
-    if (!(email in registeredAccs)) return;
+    if (!(email in registeredAccs)) {console.log(email);return;}
 
     const registeredPassword = registeredAccs[email];
-    if (registeredPassword !== password) return;
+    if (registeredPassword !== password) {console.log(registeredPassword, password); return;}
 
-    this.ls.set('authData', {email, password});
-    this.router.navigate([RoutePaths.POSTS]);
+    this.auth.login(email, password, [RoutePaths.POSTS]);
   }
 
   getEmailError() {

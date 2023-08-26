@@ -32,7 +32,7 @@ export class PostService {
   }
 
   getPost(id: number | string): Observable<PostModel> {
-    const fetched$ = this.http.get<PostModel>(`${this.baseUrl}post/${id}`);
+    const fetched$ = this.http.get<PostModel>(`${this.baseUrl}posts/${id}`);
     const lsPost$: Observable<PostModel> = this.lsPosts$
       .pipe(
         map(posts => posts.find(post => post.id === id)),

@@ -1,0 +1,78 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 0;
+
+  --list-bgc: #3b5077;
+  --item-bgc: #689AD3;
+}
+
+.list {
+  width: 80%;
+  padding: 20px;
+  background-color: var(--list-bgc);
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.item {
+  @include mat.elevation-transition();
+  @include mat.elevation(5);
+
+  cursor: pointer;
+
+  padding: 10px;
+  background-color: var(--item-bgc);
+  color: white;
+
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  transition: all .5s ease;
+
+  &:focus,
+  &:hover {
+    background-color: #5b89b9;
+    transform: translateZ(10px);
+    @include mat.elevation(12);
+  }
+
+  &:active {
+    transition-duration: 0.1s;
+    transform: translateZ(5px);
+  }
+}
+
+mat-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+mat-paginator::ng-deep {
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: blue;
+  border-radius: 4px;
+  @include mat.elevation(2);
+
+  & button:not(.mat-mdc-tooltip-disabled) .mat-mdc-paginator-icon path {
+    fill: white;
+  }
+}
