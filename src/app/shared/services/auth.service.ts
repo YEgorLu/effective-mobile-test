@@ -39,9 +39,9 @@ export class AuthService {
     this.router.navigate(redirect);
   }
 
-  register(email: string, password: string, redirect?: string[]) {
+  register(email: string, password: string, redirect?: string[]): Error | void {
     let registeredAccs = this.ls.get('registered');
-    if (registeredAccs && email in registeredAccs) return;
+    if (registeredAccs && email in registeredAccs) return new Error('Email уже используется');
 
     if (!registeredAccs) {
       registeredAccs = {};

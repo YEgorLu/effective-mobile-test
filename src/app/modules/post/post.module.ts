@@ -6,6 +6,7 @@ import { PostComponent } from './post.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatIconModule} from "@angular/material/icon";
     PostRoutingModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class PostModule { }

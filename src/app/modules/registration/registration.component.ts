@@ -5,6 +5,7 @@ import {LocalStorageService} from "../../core/services/local-storage.service";
 import {Router} from "@angular/router";
 import {RoutePaths} from "../../app-routing.module";
 import {AuthService} from "../../shared/services/auth.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-registration',
@@ -17,6 +18,7 @@ export class RegistrationComponent {
   constructor(
     fb: FormBuilder,
     private auth: AuthService,
+    private snackBar: MatSnackBar,
     ) {
     this.regForm = fb.group<{email: AbstractControl, password: AbstractControl, checkPassword: AbstractControl}>({
         email: new FormControl('', [Validators.email, Validators.required]),
@@ -37,7 +39,8 @@ export class RegistrationComponent {
     if (!email || !password || !checkPassword) return;
     if (password !== checkPassword) return;
 
-    this.auth.register(email, password, [RoutePaths.POSTS]);
+    const err = this.auth.register(email, password, [RoutePaths.POSTS])
+    if (err) {this.snackBar.open(err.message, undefined, {duration: 2000})};
   }
 
   public readonly RoutePaths = RoutePaths;

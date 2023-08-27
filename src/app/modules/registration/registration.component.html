@@ -15,7 +15,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Повторите пароль {{regForm.getError('mustmatch')}}</mat-label>
+      <mat-label>Повторите пароль</mat-label>
       <input matInput type="password" placeholder="*******" formControlName="checkPassword" required>
       <mat-error *ngIf="regForm.controls.checkPassword.hasError('mustmatch')">Пароли не совпадают</mat-error>
       <mat-error *ngIf="regForm.controls.checkPassword.hasError('required')">Поле не должно быть пустым</mat-error>

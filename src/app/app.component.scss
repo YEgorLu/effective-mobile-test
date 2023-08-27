@@ -4,10 +4,24 @@ mat-toolbar {
   justify-content: flex-end;
   align-items: center;
 
+  background-color: var(--primary-clr);
+  color: white;
+
   & h1 {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+.buttons button {
+  margin-right: 10px;
+  &:last-child{
+    margin-right: 0;
+  }
+
+  &.active {
+    background-color: var(--secondary-clr);
   }
 }

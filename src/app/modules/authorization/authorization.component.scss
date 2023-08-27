@@ -5,17 +5,22 @@ mat-card {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  @include mat.elevation(5);
+  padding: 20px;
+
+  background-color: var(--primary-clr);
 }
+
 form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-mat-card {
-  @include mat.elevation(5);
-  padding: 20px
+  & button:not(:disabled) {
+    color: white;
+  }
 }
 
 

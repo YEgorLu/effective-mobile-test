@@ -1,3 +1,5 @@
+@use "@angular/material" as mat;
+
 .container {
   width: 80%;
   margin-inline: auto;
@@ -8,9 +10,13 @@
 
 .post-wrapper {
   text-align: center;
+  margin-top: 10vh;
+  padding: 20px;
+  background-color: var(--secondary-clr);
+  color: white;
+  @include mat.elevation(8);
 
   & h1 {
-    margin-top: 10vh;
     margin-bottom: 5vh;
   }
 }
@@ -30,4 +36,5 @@ mat-spinner {
 .back {
   top: 10%;
   right: 10%;
+  color: var(--primary-clr);
 }

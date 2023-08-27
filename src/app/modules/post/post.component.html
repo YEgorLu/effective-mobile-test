@@ -1,8 +1,8 @@
 <div class="container">
-  <div *ngIf="postData" class="post-wrapper">
+  <mat-card *ngIf="postData" class="post-wrapper">
     <h1>{{postData.title | titlecase}}</h1>
     <p>{{postData.body}}</p>
-  </div>
+  </mat-card>
 </div>
 
 <mat-spinner *ngIf="!postData"></mat-spinner>
