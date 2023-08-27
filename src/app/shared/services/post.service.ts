@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, merge, switchMap, tap, find, concat, map, filter} from "rxjs";
+import {Observable,tap, concat, map, filter} from "rxjs";
 import {PostModel} from "../../core/models/post.model";
 import {LocalStorageService} from "../../core/services/local-storage.service";
 

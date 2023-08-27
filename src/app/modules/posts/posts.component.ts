@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {PostService} from "../../shared/services/post.service";
-import {filter, Observable, startWith, Subject, takeUntil, tap} from "rxjs";
+import {filter, Observable, Subject, takeUntil, tap} from "rxjs";
 import {PostModel} from "../../core/models/post.model";
 import { RoutePaths } from 'src/app/app-routing.module';
 import {PageEvent} from "@angular/material/paginator";
@@ -20,8 +20,8 @@ export class PostsComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private post: PostService,
-    private route: ActivatedRoute,
+    post: PostService,
+    route: ActivatedRoute,
     private router: Router,
     ) {
     this.posts$ = post.getPosts().pipe(tap(() => this.gotPosts = true));

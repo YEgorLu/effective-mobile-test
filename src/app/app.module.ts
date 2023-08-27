@@ -6,8 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DirectivesModule} from "./shared/directives/directives.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { HttpClientModule} from "@angular/common/http";
-import {MyCustomPaginatorIntl} from "./core/internatialization/paginator";
-import {MatPaginatorIntl} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({

@@ -1,25 +1,27 @@
-<div class="container">
+<mat-card>
   <form [formGroup]="regForm" (ngSubmit)="register()">
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput type="email" placeholder="your@mail.ru" formControlName="email" required>
-      <mat-error *ngIf="regForm.controls['email'].invalid">{{getEmailError()}}</mat-error>
+      <mat-error *ngIf="regForm.controls.email.hasError('required')">Пустой email</mat-error>
+      <mat-error *ngIf="regForm.controls.email.hasError('email')">Неправильный формат email</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Пароль</mat-label>
       <input matInput type="password" placeholder="*******" formControlName="password" required>
-      <mat-error *ngIf="regForm.controls['password'].invalid">{{getPasswordError()}}</mat-error>
+      <mat-error *ngIf="regForm.controls.password.hasError('minlength')">Менее 7 символов</mat-error>
+      <mat-error *ngIf="regForm.controls.password.hasError('required')">Пустой пароль</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Повторите пароль</mat-label>
+      <mat-label>Повторите пароль {{regForm.getError('mustmatch')}}</mat-label>
       <input matInput type="password" placeholder="*******" formControlName="checkPassword" required>
-      <mat-error *ngIf="regForm.controls['password'].invalid">{{getPasswordCheckError()}}</mat-error>
+      <mat-error *ngIf="regForm.controls.checkPassword.hasError('mustmatch')">Пароли не совпадают</mat-error>
+      <mat-error *ngIf="regForm.controls.checkPassword.hasError('required')">Поле не должно быть пустым</mat-error>
     </mat-form-field>
 
-    <button mat-button type="submit" [disabled]="regForm.valid">Зарегистрироваться</button>
-    <button mat-button type="button" (click)="goToAuth()">Войти</button>
+    <button mat-button type="submit" [disabled]="regForm.invalid">Зарегистрироваться</button>
   </form>
-</div>
+</mat-card>>
 

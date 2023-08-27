@@ -51,4 +51,17 @@ export class AuthService {
     if (redirect)
       this.router.navigate(redirect);
   }
+
+  isRegistered(email: string, password: string): boolean {
+    const registeredAccs = this.ls.get('registered');
+    if (!registeredAccs)
+      return false;
+
+
+    if (!(email in registeredAccs))
+      return false;
+
+    const registeredPassword = registeredAccs[email];
+    return registeredPassword === password;
+  }
 }

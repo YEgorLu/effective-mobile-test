@@ -1,0 +1,21 @@
+@use "@angular/material" as mat;
+
+mat-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  @include mat.elevation(5);
+  padding: 20px
+}
+
+

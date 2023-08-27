@@ -1,18 +1,21 @@
-<div class="container">
-  <form [formGroup]="authForm" (ngSubmit)="login()">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="your@mail.ru" formControlName="email" required>
-      <mat-error *ngIf="authForm.controls.email.invalid">{{getEmailError()}}</mat-error>
-    </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Пароль</mat-label>
-      <input matInput placeholder="*******" formControlName="password" required>
-      <mat-error *ngIf="authForm.controls.password.invalid">{{getPasswordError()}}</mat-error>
-    </mat-form-field>
+  <mat-card>
+    <form [formGroup]="authForm" (ngSubmit)="login()">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="your@mail.ru" formControlName="email" required>
+        <mat-error *ngIf="authForm.controls.email.hasError('required')">Пустой email</mat-error>
+        <mat-error *ngIf="authForm.controls.email.hasError('email')">Неправильный формат email</mat-error>
+      </mat-form-field>
 
-    <button mat-button type="submit" [disabled]="authForm.invalid">Войти</button>
-    <button mat-button [routerLink]="[c.REGISTRATION]" [routerLinkActive]="'active'">Зарегистрироваться</button>
-  </form>
-</div>
+      <mat-form-field>
+        <mat-label>Пароль</mat-label>
+        <input matInput placeholder="*******" formControlName="password" required>
+        <mat-error *ngIf="authForm.controls.password.hasError('minlength')">Менее 7 символов</mat-error>
+        <mat-error *ngIf="authForm.controls.password.hasError('required')">Пустой пароль</mat-error>
+      </mat-form-field>
+
+      <button mat-button type="submit" [disabled]="authForm.invalid">Войти</button>
+    </form>
+  </mat-card>
+

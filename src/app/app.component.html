@@ -1,4 +1,5 @@
 <mat-toolbar>
+  <h1>Effective Movibile test</h1>
   <div class="buttons" *ngLet="isOnAuthPages() as isOnAuthPages">
     <button *ngIf="!isOnAuthPages && auth.logged" mat-button (click)="auth.logout()">Выход</button>
     <button *ngIf="isOnAuthPages" mat-button [routerLink]="RoutePaths.AUTHORIZATION" [routerLinkActive]="'active'">Войти</button>
