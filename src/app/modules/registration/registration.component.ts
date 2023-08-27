@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {mustMatch} from "../../shared/validators/mustMatch";
-import {LocalStorageService} from "../../core/services/local-storage.service";
-import {Router} from "@angular/router";
 import {RoutePaths} from "../../app-routing.module";
 import {AuthService} from "../../shared/services/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -13,14 +11,14 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-  regForm: FormGroup<{email: AbstractControl, password: AbstractControl, checkPassword: AbstractControl}>;
+  regForm: FormGroup<RegForm>;
 
   constructor(
     fb: FormBuilder,
     private auth: AuthService,
     private snackBar: MatSnackBar,
-    ) {
-    this.regForm = fb.group<{email: AbstractControl, password: AbstractControl, checkPassword: AbstractControl}>({
+  ) {
+    this.regForm = fb.group<RegForm>({
         email: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('', [Validators.minLength(7), Validators.required]),
         checkPassword: new FormControl('', [Validators.required])
@@ -39,9 +37,17 @@ export class RegistrationComponent {
     if (!email || !password || !checkPassword) return;
     if (password !== checkPassword) return;
 
-    const err = this.auth.register(email, password, [RoutePaths.POSTS])
-    if (err) {this.snackBar.open(err.message, undefined, {duration: 2000})};
+    const err = this.auth.register(email, password, [RoutePaths.POSTS]);
+    if (err) {
+      this.snackBar.open(err.message, undefined, {duration: 2000});
+    }
   }
 
   public readonly RoutePaths = RoutePaths;
+}
+
+interface RegForm {
+  email: AbstractControl,
+  password: AbstractControl,
+  checkPassword: AbstractControl
 }

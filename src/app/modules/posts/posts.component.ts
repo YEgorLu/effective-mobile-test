@@ -38,7 +38,6 @@ export class PostsComponent implements OnDestroy {
   }
 
   handlePageChange(ev: PageEvent) {
-    console.log(ev.pageIndex)
     this.router.navigate([RoutePaths.POSTS], {queryParams: {page: ev.pageIndex}});
   }
 

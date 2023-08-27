@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {RoutePaths} from "./app-routing.module";
 import {AuthService} from "./shared/services/auth.service";
-import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -15,11 +14,8 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     public auth: AuthService,
-  ) {
-    route.url.subscribe(console.log);
-  }
+  ) {}
 
   isOnAuthPages() {
     let url = this.router.routerState.snapshot.url;
