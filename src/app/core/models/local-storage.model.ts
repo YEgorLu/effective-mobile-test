@@ -10,6 +10,5 @@ export interface LocalStorageModel {
 
 export type LocalStorageKeys = keyof LocalStorageModel;
 export type LocalStorageArrayKeys = ArrayKeys<LocalStorageModel>;
-export type LocalStorageRecordKeys = ObjectKeys<LocalStorageModel>;
 
 
